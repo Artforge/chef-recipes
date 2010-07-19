@@ -2,14 +2,15 @@ Installation steps
 ------------------
 
 1. Copy resque directory to your app's recipes/ folder (create the recipes folder if you haven't already)
-2. Customize the template on line 5 and 6 to meet your needs. Alternately, if you want all workers to run 
+2. Customize the template on line 5 and 6 to meet your needs. Alternately, if you want all workers to run
    all queues, you may switch the recipe to use the resque_all_queues.pill.erb template instead.
-3. Upload your recipe to your app by running "ey recipes upload --e environment_name"
-4. Deploy your app.
+3. Customize the recipe's num_workers to meet your needs.
+4. Upload your recipe to your app by running "ey recipes upload -e environment_name"
+5. Deploy your app from the dashboard, or run "ey recipes apply -e environment_name"
 
 Troubleshooting
 ---------------
 
 If your resque/redis setup depends on the environment, or if you wish to cache the environment prior to
 resque forking for each job, you will need to add "environment" before "resque:work" in the start_command
-in the template.
+in the template. You should also increase the mem_usage threshold to compensate for a loaded environment.
