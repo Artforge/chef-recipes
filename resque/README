@@ -6,3 +6,10 @@ Installation steps
 specify ['*'] for queues_for_all_workers.
 3. Upload your recipe to your app by running "ey recipes upload --e environment_name"
 4. Deploy your app.
+
+Troubleshooting
+---------------
+
+If your resque/redis setup depends on the environment, or if you wish to cache the environment prior to
+resque forking for each job, you will need to add "environment" before "resque:work" in the start_command
+in the template.
