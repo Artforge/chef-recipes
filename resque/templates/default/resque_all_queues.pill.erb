@@ -6,11 +6,11 @@
 app_name = "<%= @app_name %>"
 rails_env = "<%= @rails_env %>"
 num_workers = "<%= @num_workers %>".to_i
+owner_name = "<%= @owner_name %>"
 
 Bluepill.application("#{app_name}_resque", :log_file => "/var/log/bluepill.log") do |app|
 
-  app.uid = 'deploy'
-  app.gid = 'deploy'
+  app.uid = app.gid = owner_name
 
   num_workers.times do |idx|
     app.process("resque_worker_#{idx}") do |process|

@@ -10,19 +10,20 @@
 
 app_name = "<%= @app_name %>"
 rails_env = "<%= @rails_env %>"
+owner_name = "<%= @owner_name %>"
 
 min_num_workers = [queues_for_individual_workers.length, 1].max
 num_workers_from_recipe = "<%= @num_workers %>".to_i
 num_workers = [min_num_workers, num_workers_from_recipe].max
 
+initial_workers = queues_for_individual_workers.map { |arr| Array(arr) + queues_for_all_workers }
+worker_queues = initial_workers +
+                  Array.new(num_workers - initial_workers.length) { queues_for_all_workers }
+
+
 Bluepill.application("#{app_name}_resque", :log_file => "/var/log/bluepill.log") do |app|
 
-  app.uid = 'deploy'
-  app.gid = 'deploy'
-
-  initial_workers = queues_for_individual_workers.map { |arr| Array(arr) + queues_for_all_workers }
-  worker_queues = initial_workers +
-                    Array.new(num_workers - initial_workers.length) { queues_for_all_workers }
+  app.uid = app.gid = owner_name
 
   worker_queues.each_with_index do |queue, idx|
     app.process("resque_worker_#{idx}") do |process|

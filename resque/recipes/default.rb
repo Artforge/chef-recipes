@@ -34,7 +34,8 @@ if ['solo', 'util'].include?(node[:instance_role])
       variables({
         :num_workers => worker_count,
         :app_name => app,
-        :rails_env => node[:environment][:framework_env]
+        :rails_env => node[:environment][:framework_env],
+        :owner_name => node[:owner_name]
       })
     end
 
