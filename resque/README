@@ -1,0 +1,8 @@
+Installation steps
+------------------
+
+1. Copy resque directory to your app's recipes/ folder (create the recipes folder if you haven't already)
+2. Customize the template on line 5 and 6 to meet your needs. If you want all workers to run all queues,
+specify ['*'] for queues_for_all_workers.
+3. Upload your recipe to your app by running "ey recipes upload --e environment_name"
+4. Deploy your app.
