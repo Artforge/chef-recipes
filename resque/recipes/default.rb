@@ -45,12 +45,6 @@ if ['solo', 'util'].include?(node[:instance_role])
       }
     end
 
-    execute "restart-resque" do
-      command %Q{
-        bluepill restart resque
-      }
-    end
-
   end
 
 end
