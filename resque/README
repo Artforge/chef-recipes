@@ -6,7 +6,7 @@ Installation steps
    all queues, you may switch the recipe to use the resque_all_queues.pill.erb template instead.
 3. Customize the template's mem_usage setting to be appropriate for your application.
 4. Customize the recipe's num_workers to meet your needs.
-5. Add the after deploy hook from after_deploy.rb to your deploy/after_deploy.rb file (create one if you
+5. Add the after restart hook from after_restart.rb to your deploy/after_restart.rb file (create one if you
    don't have one). You can then delete this file from your local cookbook.
 6. Commit and push your changes.
 7. Upload your recipe to your app by running "ey recipes upload -e environment_name"
